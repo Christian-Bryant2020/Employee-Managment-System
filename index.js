@@ -110,6 +110,32 @@ const addEmployee = () => {
 
 const viewDepartment = () => {
     console.log("viewDepartment!")
+    let query = 'SELECT employee.id, employee.first_name, employee.last_name, role.title '
+    query += 'FROM role INNER JOIN employee ON employee.role_id = role.id RIGHT JOIN department ON department.id = role.department_id '
+    query += 'WHERE ?'
+    inquirer
+      .prompt({
+        name: 'spec',
+        type: 'list',
+        message: "Which department's employees would you like to view?",
+        choices: ['Urban Design', 'Land Development', 'Landscape Architecture', 'Civil']
+      })
+      .then((answer) => {
+        connection.query(query, { name: answer.spec }, (err, res) => {
+          const persons = [];
+          res.forEach(({ id, first_name, last_name, title }) => {
+            const stats = {
+              "ID": id,
+              "First Name": first_name,
+              "Last Name": last_name,
+              "Title": title,
+            }
+            persons.push(stats);
+          });
+          console.table(persons);
+          start();
+        })
+      })
 }
 
 const viewRole = () => {
