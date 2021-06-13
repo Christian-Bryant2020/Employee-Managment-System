@@ -1,0 +1,20 @@
+{
+  "name": "Employee-Managment-System",
+  "version": "1.0.0",
+  "description": "- [Description](#description)\r   - [Installation](#install)\r   - [Usage](#usage)\r   - [Contributors](#contributers)\r   - [Contact](#contact)\r   - [Questions](#questions)\r   - [License](#license)\r   ## Description \r   An online/offline budget tracker that allows users to add expenses and deposits with or without a connection.\r   ## Installation\r   1. Clone the repository 2. Run \"npm i\" to install dependencies. 3. Run \"npm start\" to launch the application locally.\r   ## Usage\r   https://christian-bryant2020.github.io/Progressive-Budget/\r   ## Contributing\r   https://github.com/Christian-Bryant2020/Progressive-Budget\r   ## Demo\r   insert demo here\r   ## Questions\r   Please reach out with any questions through the links below:\r   - https://github.com/christian-bryant2020\r   - bryant.christian2020@gmail.com",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Christian-Bryant2020/Employee-Managment-System.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Christian-Bryant2020/Employee-Managment-System/issues"
+  },
+  "homepage": "https://github.com/Christian-Bryant2020/Employee-Managment-System#readme"
+}
