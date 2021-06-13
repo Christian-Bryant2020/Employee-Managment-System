@@ -98,14 +98,112 @@ const view = () => {
 }
 const addDepartment = () => {
     console.log("addDepartment!")
-}
+    inquirer
+    .prompt({
+      name: 'newDept',
+      type: 'input',
+      message: 'Please enter the name of the department you would like to add.',
+    })
+    .then((answer) => {
+      connection.query('INSERT INTO department SET ?',
+        {
+          name: answer.newDept,
+        },
+        (err) => {
+          if (err) throw err;
+          console.log('Your department has been added.');
+          start();
+        });
+    });
+};
+
 
 const addRole = () => {
     console.log("addRole!")
-}
+    connection.query('SELECT * FROM department', (err, res) => {
+        if (err) throw err;
+        inquirer
+          .prompt([
+            {
+              name: 'addRole',
+              type: 'input',
+              message: 'Please enter the name of the role you would like to add.',
+            },
+            {
+              name: 'addRoleSalary',
+              type: 'input',
+              message: 'Please enter the salary of the role you just added.'
+            },
+            {
+              name: 'deptID',
+              type: 'list',
+              message: 'Please name the department the role will be in.',
+              choices() {
+                const deptArray = [];
+                for (let i = 0; i < res.length; i++) {
+                  deptArray.push(`${i + 1} ${res[i].name}`);
+                }
+                return deptArray;
+              },
+            }])
+          .then((answer) => {
+            connection.query('INSERT INTO role SET ?',
+              {
+                title: answer.addRole,
+                salary: answer.addRoleSalary,
+                department_id: answer.deptID.split('')[0]
+              },
+              (err) => {
+                if (err) throw err;
+                console.log('Your role has been added.');
+                start();
+              });
+          });
+      })
+    };
 
 const addEmployee = () => {
     console.log("addEmployee!")
+    connection.query('SELECT * FROM role', (err, res) => {
+        if (err) throw err;
+        inquirer
+          .prompt([
+            {
+              name: 'firstName',
+              type: 'input',
+              message: "Please enter the first name of the employee you'd like to add.",
+            },
+            {
+              name: 'lastName',
+              type: 'input',
+              message: "Please enter the last name of the employee you'd like to add.",
+            },
+            {
+              name: 'roleID',
+              type: 'list',
+              message: 'Please name of the role the employee will have.',
+              choices() {
+                const roleArray = [];
+                for (let i = 0; i < res.length; i++) {
+                  roleArray.push(`${i + 1} ${res[i].title}`);
+                }
+                return roleArray;
+              },
+            }])
+          .then((answer) => {
+            connection.query('INSERT INTO employee SET ?',
+              {
+                first_name: answer.firstName,
+                last_name: answer.lastName,
+                role_id: answer.roleID.split('')[0]
+              },
+              (err) => {
+                if (err) throw err;
+                console.log('Added successfully.');
+                start();
+              });
+          });
+      })
 }
 
 const viewDepartment = () => {
@@ -152,17 +250,17 @@ const viewRole = () => {
     })
     .then((answer) => {
       connection.query(query, { title: answer.role }, (err, res) => {
-        const empArray = []
+        const persons = []
         res.forEach(({ id, first_name, last_name, salary },) => {
-          const empObject = {
+          const specs = {
             "ID": id,
             "First Name": first_name,
             "Last Name": last_name,
             "Salary": salary
           }
-          empArray.push(empObject);
+          persons.push(specs);
         })
-        console.table(empArray);
+        console.table(persons);
         start();
       })
     })
@@ -174,9 +272,9 @@ const viewEmployee = () => {
     let query = 'SELECT employee.id, employee.first_name, employee.last_name, role.title, role.salary, employee.manager_id, department.name,'
   query += 'CONCAT(manager.first_name, " ", manager.last_name) AS manager FROM role INNER JOIN employee ON employee.role_id = role.id LEFT JOIN employee manager ON manager.id = employee.manager_id INNER JOIN department ON role.department_id = department.id;'
   connection.query(query, (err, res) => {
-    const empArray = []
+    const persons = []
     res.forEach(({ id, first_name, last_name, title, salary, manager, name },) => {
-      const empObject = {
+      const specs = {
         "ID": id,
         "First Name": first_name,
         "Last Name": last_name,
@@ -185,9 +283,9 @@ const viewEmployee = () => {
         "Manager": manager,
         "Department": name,
       }
-      empArray.push(empObject);
+      persons.push(specs);
     });
-    console.table(empArray);
+    console.table(persons);
     start();
   })
 }

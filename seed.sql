@@ -48,16 +48,16 @@ VALUES
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUES 
-    ("James", "J", 1, 2), 
-    ("Adam", "A", 1, 2), 
-    ("Ben", "B", 2, 2), 
+    ("James", "J", 1, 4), 
+    ("Adam", "A", 1, 4), 
+    ("Ben", "B", 2, 4), 
     ("Christian", "C", 2, NULL), 
-    ("Dane", "D", 3, 2), 
-    ("Eli", "E", 3, 2), 
-    ("Fiora", "F", 4, 2), 
-    ("Greg", "G", 4, 2), 
-    ("Hazel", "H", 5, 2), 
-    ("Keven", "K", 5, 2);
-    ("Lian", "L", 6, 2);
-    ("Melo", "M", 7, 2);
+    ("Dane", "D", 3, 4), 
+    ("Eli", "E", 3, 4), 
+    ("Fiora", "F", 4, 10), 
+    ("Greg", "G", 4, 10), 
+    ("Hazel", "H", 5, 10), 
+    ("Keven", "K", 5, NULL),
+    ("Lian", "L", 6, 10),
+    ("Melo", "M", 7, 10);
 
