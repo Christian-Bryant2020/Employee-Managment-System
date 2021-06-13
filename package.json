@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/Christian-Bryant2020/Employee-Managment-System/issues"
   },
-  "homepage": "https://github.com/Christian-Bryant2020/Employee-Managment-System#readme"
+  "homepage": "https://github.com/Christian-Bryant2020/Employee-Managment-System#readme",
+  "dependencies": {
+    "console.table": "^0.10.0",
+    "inquirer": "^8.0.0",
+    "mysql": "^2.18.1"
+  }
 }
