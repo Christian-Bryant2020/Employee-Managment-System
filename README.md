@@ -12,7 +12,7 @@
   ## Installation
   1. Clone the repository 2. Run "npm i" to install dependencies. 3. Run "node index.js" to launch the application in the command line.
   ## Contributing
-  https://github.com/Christian-Bryant2020/Progressive-Budget
+  https://github.com/Christian-Bryant2020/Employee-Managment-System
   ## Vidoe Demo
   https://drive.google.com/file/d/1wuZvoK2cwLrI9oRj-L_8-MIZdp_jlqFc/view?usp=drivesdk
   ## Questions
