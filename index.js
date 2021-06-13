@@ -102,7 +102,7 @@ const addDepartment = () => {
     .prompt({
       name: 'newDept',
       type: 'input',
-      message: 'Please enter the name of the department you would like to add.',
+      message: 'Please enter the name of the department.',
     })
     .then((answer) => {
       connection.query('INSERT INTO department SET ?',
@@ -111,7 +111,7 @@ const addDepartment = () => {
         },
         (err) => {
           if (err) throw err;
-          console.log('Your department has been added.');
+          console.log('Added Successfully.');
           start();
         });
     });
@@ -125,19 +125,19 @@ const addRole = () => {
         inquirer
           .prompt([
             {
-              name: 'addRole',
+              name: 'roleName',
               type: 'input',
-              message: 'Please enter the name of the role you would like to add.',
+              message: 'Please enter the name.',
             },
             {
-              name: 'addRoleSalary',
+              name: 'roleSalary',
               type: 'input',
-              message: 'Please enter the salary of the role you just added.'
+              message: 'Please enter the salary.'
             },
             {
               name: 'deptID',
               type: 'list',
-              message: 'Please name the department the role will be in.',
+              message: 'Please name the coorisponding department.',
               choices() {
                 const deptArray = [];
                 for (let i = 0; i < res.length; i++) {
@@ -149,8 +149,8 @@ const addRole = () => {
           .then((answer) => {
             connection.query('INSERT INTO role SET ?',
               {
-                title: answer.addRole,
-                salary: answer.addRoleSalary,
+                title: answer.roleName,
+                salary: answer.roleSalary,
                 department_id: answer.deptID.split('')[0]
               },
               (err) => {
@@ -171,17 +171,17 @@ const addEmployee = () => {
             {
               name: 'firstName',
               type: 'input',
-              message: "Please enter the first name of the employee you'd like to add.",
+              message: "Please enter the first name.",
             },
             {
               name: 'lastName',
               type: 'input',
-              message: "Please enter the last name of the employee you'd like to add.",
+              message: "Please enter the last name.",
             },
             {
               name: 'roleID',
               type: 'list',
-              message: 'Please name of the role the employee will have.',
+              message: 'Please name of the role.',
               choices() {
                 const roleArray = [];
                 for (let i = 0; i < res.length; i++) {
